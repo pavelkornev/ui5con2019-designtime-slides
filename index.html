@@ -112,6 +112,12 @@
 			.reveal pre code.javascript {
 				padding: 2%;
 			}
+			.reveal .hljs:not(:first-child).fragment.ui5-code {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+			}
 		</style>
 	</head>
 	<body>
@@ -138,7 +144,7 @@
 				</section>
 
 				<section data-background-color="#000">
-					<h2 class="ui5con-divider">Is it possible to implement this<br>with a couple lines of code?</h2>
+					<h2 class="ui5con-divider">Is it possible to implement this<br>with a couple of lines of code?</h2>
 				</section>
 
 				<section data-background-color="#000">
@@ -541,7 +547,7 @@
 				</section>
 
 				<section data-background-color="#000">
-					<h2 class="ui5con-divider">Overlays <span class="ui5con-orange">concept</span></h2>
+					<h2 class="ui5con-divider">Overlay <span class="ui5con-orange">concept</span></h2>
 				</section>
 
 				<section data-background-color="#000">
@@ -630,11 +636,11 @@
 					</style>
 					<h2 class="ui5con-orange" style="margin-bottom: 3%">Overlays</h2>
 					<div class="ui5-overlays-list">
-						<div class="fragment">— automatically calculate their geometry based on controls dimention</div>
+						<div class="fragment">— automatically calculate their geometry based on controls dimension</div>
 						<div class="fragment">— automatically calculate their position on the screen</div>
 						<div class="fragment">— automatically calculate z-indexes</div>
 						<div class="fragment">— handle overflows (scrollbars)</div>
-						<div class="fragment">— ...and keep it all in sync during time!</div>
+						<div class="fragment">— ...and keep it all in sync during life time!</div>
 					</ul>
 				</section>
 
@@ -771,7 +777,7 @@
 							<line class="ui5-svg-overlays-st3_ fragment" data-fragment-index="1" x1="680" y1="355" x2="680" y2="430"/>
 
 							<!-- Lines: from User to Overlay -->
-							<path class="ui5-svg-overlays-st3_ ui5-svg-overlays-st3_quick fragment" data-fragment-index="3" d="M453,225v-17c0-5.5,4.5-10,10-10h103c11,0,20-9,20-20v-23c0-16.6,13.4-30,30-30h29"/>
+							<path class="ui5-svg-overlays-st3_ ui5-svg-overlays-st3_quick fragment" data-fragment-index="3" d="M645,125h-29c-16.6,0-30,13.4-30,30v23c0,11-9,20-20,20H463c-5.5,0-10,4.5-10,10v17"/>
 						<!-- /Lines -->
 
 						<!-- Text: Starts -->
@@ -1053,12 +1059,12 @@
 
 				<section data-background-color="#000">
 					<section>
-						<h2 class="ui5con-divider">Plugins <span class="ui5con-orange">concept</span></h2>
+						<h2 class="ui5con-divider">Plugin <span class="ui5con-orange">concept</span></h2>
 					</section>
-					<section data-background-color="#000">
+					<section>
 						<h2>Plugins are responsible for actions</h2>
 					</section>
-					<section data-background-color="#000">
+					<section>
 						<svg width="60%" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 							 viewBox="0 0 784 550" style="enable-background:new 0 0 784 550;" xml:space="preserve">
 							<style type="text/css">
@@ -1463,7 +1469,7 @@
 								<line class="st3" x1="392" y1="160" x2="392" y2="235"/>
 
 								<!-- Lines: from Design Time to Plugins -->
-								<path class="st3_ fragment" data-fragment-index="4" d="M104,125v-15c0-16.6,13.4-30,30-30h134"/>
+								<path class="st3_ fragment" data-fragment-index="4" d="M268,80H134c-16.6,0-30,13.4-30,30v15"/>
 
 								<!-- Lines: from User to Overlay -->
 								<path class="st3" d="M453,225v-17c0-5.5,4.5-10,10-10h103c11,0,20-9,20-20v-23c0-16.6,13.4-30,30-30h29"/>
@@ -1739,129 +1745,286 @@
 				</section>
 
 				<section data-background-color="#000">
-					<h2 class="ui5con-divider" style="margin-bottom: 2%;">Creating a DesignTime instance</h2>
-					<pre><code class="javascript" data-trim style="max-height: 850px;">
-						sap.ui.require([
-						    "sap/ui/dt/DesignTime",
-						    "sap/ui/dt/plugin/MouseSelection",
-						    "sap/ui/dt/plugin/ControlDragDrop",
-						    "custom/ushell/plugin/shooter/designtime/Shooter"
-						], function (
-						    DesignTime,
-						    MouseSelection,
-						    ControlDragDrop,
-						    Shooter
-						) {
-						    var oAppLifeCycle = sap.ushell.Container.getService("AppLifeCycle");
-						    var oDesignTime = new DesignTime({
-						        rootElements: oAppLifeCycle.getCurrentApplication().componentInstance,
-						        plugins: [
-						            new MouseSelection(),
-						            new ControlDragDrop(),
-						            new Shooter()
-						        ]
-						    });
-						});
-					</code></pre>
+					<h2 class="ui5con-divider" style="margin-bottom: 2%;">Creating a Design Time instance</h2>
+					<pre class="javascript" style="position: relative;"><code data-trim style="max-height: 850px;" data-line-numbers="2, 7, 13, 20">
+							sap.ui.require([
+							    "sap/ui/dt/DesignTime",
+							    "sap/ui/dt/plugin/MouseSelection",
+							    "sap/ui/dt/plugin/ControlDragDrop",
+							    "custom/ushell/plugin/shooter/designtime/Shooter"
+							], function (
+							    DesignTime,
+							    MouseSelection,
+							    ControlDragDrop,
+							    Shooter
+							) {
+							    var oAppLifeCycle = sap.ushell.Container.getService("AppLifeCycle");
+							    var oDesignTime = new DesignTime({
+							        rootElements: oAppLifeCycle.getCurrentApplication().componentInstance,
+							        plugins: [
+							            new MouseSelection(),
+							            new ControlDragDrop(),
+							            new Shooter()
+							        ]
+							    });
+							});
+						</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="12, 14">
+							sap.ui.require([
+							    "sap/ui/dt/DesignTime",
+							    "sap/ui/dt/plugin/MouseSelection",
+							    "sap/ui/dt/plugin/ControlDragDrop",
+							    "custom/ushell/plugin/shooter/designtime/Shooter"
+							], function (
+							    DesignTime,
+							    MouseSelection,
+							    ControlDragDrop,
+							    Shooter
+							) {
+							    var oAppLifeCycle = sap.ushell.Container.getService("AppLifeCycle");
+							    var oDesignTime = new DesignTime({
+							        rootElements: oAppLifeCycle.getCurrentApplication().componentInstance,
+							        plugins: [
+							            new MouseSelection(),
+							            new ControlDragDrop(),
+							            new Shooter()
+							        ]
+							    });
+							});
+						</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="3-5,15-19">
+							sap.ui.require([
+							    "sap/ui/dt/DesignTime",
+							    "sap/ui/dt/plugin/MouseSelection",
+							    "sap/ui/dt/plugin/ControlDragDrop",
+							    "custom/ushell/plugin/shooter/designtime/Shooter"
+							], function (
+							    DesignTime,
+							    MouseSelection,
+							    ControlDragDrop,
+							    Shooter
+							) {
+							    var oAppLifeCycle = sap.ushell.Container.getService("AppLifeCycle");
+							    var oDesignTime = new DesignTime({
+							        rootElements: oAppLifeCycle.getCurrentApplication().componentInstance,
+							        plugins: [
+							            new MouseSelection(),
+							            new ControlDragDrop(),
+							            new Shooter()
+							        ]
+							    });
+							});
+						</code></pre>
 				</section>
 
-<!-- 				<section data-background-color="#000">
-					<h2 class="ui5con-divider">Implementing a custom plugin</h2><br>
-					<pre><code class="javascript" data-trim >
+				<section data-background-color="#000">
+					<h2 class="ui5con-divider" style="margin-bottom: 2%;">Implementing a custom plugin</h2>
+					<pre class="javascript"><code data-trim style="max-height: 850px;" data-line-numbers="1-2">
 						sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
-						    var MyPlugin = Plugin.extend("custom.designtime.plugin.MyPlugin");
+						    var Shooter = Plugin.extend("custom.ushell.plugin.shooter.designtime.Shooter");
 
-						    MyPlugin.prototype.registerElementOverlay = function (oOverlay) {};
+						    Shooter.prototype.registerElementOverlay = function (oOverlay) {
+						        oOverlay.attachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
 
-						    MyPlugin.prototype.deregisterElementOverlay = function (oOverlay) {};
+						    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
+						        oOverlay.detachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
 
-						    return MyPlugin;
+						    Shooter.prototype._onClick = function (e) {
+						        this.setSelected(false);
+						        this.addStyleClass("sapUiDtOverlayPoof");
+						        this.attachBrowserEvent("animationend", function () {
+						            this.getElement().setVisible(false);
+						        }, this);
+						        e.stopPropagation();
+						    };
+
+						    return Shooter;
+						});
+					</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="4-6">
+						sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
+						    var Shooter = Plugin.extend("custom.ushell.plugin.shooter.designtime.Shooter");
+
+						    Shooter.prototype.registerElementOverlay = function (oOverlay) {
+						        oOverlay.attachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
+						        oOverlay.detachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype._onClick = function (e) {
+						        this.setSelected(false);
+						        this.addStyleClass("sapUiDtOverlayPoof");
+						        this.attachBrowserEvent("animationend", function () {
+						            this.getElement().setVisible(false);
+						        }, this);
+						        e.stopPropagation();
+						    };
+
+						    return Shooter;
+						});
+					</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="8-10">
+						sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
+						    var Shooter = Plugin.extend("custom.ushell.plugin.shooter.designtime.Shooter");
+
+						    Shooter.prototype.registerElementOverlay = function (oOverlay) {
+						        oOverlay.attachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
+						        oOverlay.detachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype._onClick = function (e) {
+						        this.setSelected(false);
+						        this.addStyleClass("sapUiDtOverlayPoof");
+						        this.attachBrowserEvent("animationend", function () {
+						            this.getElement().setVisible(false);
+						        }, this);
+						        e.stopPropagation();
+						    };
+
+						    return Shooter;
+						});
+					</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="12-19">
+						sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
+						    var Shooter = Plugin.extend("custom.ushell.plugin.shooter.designtime.Shooter");
+
+						    Shooter.prototype.registerElementOverlay = function (oOverlay) {
+						        oOverlay.attachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
+						        oOverlay.detachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype._onClick = function (e) {
+						        this.setSelected(false);
+						        this.addStyleClass("sapUiDtOverlayPoof");
+						        this.attachBrowserEvent("animationend", function () {
+						            this.getElement().setVisible(false);
+						        }, this);
+						        e.stopPropagation();
+						    };
+
+						    return Shooter;
+						});
+					</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="13">
+						sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
+						    var Shooter = Plugin.extend("custom.ushell.plugin.shooter.designtime.Shooter");
+
+						    Shooter.prototype.registerElementOverlay = function (oOverlay) {
+						        oOverlay.attachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
+						        oOverlay.detachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype._onClick = function (e) {
+						        this.setSelected(false);
+						        this.addStyleClass("sapUiDtOverlayPoof");
+						        this.attachBrowserEvent("animationend", function () {
+						            this.getElement().setVisible(false);
+						        }, this);
+						        e.stopPropagation();
+						    };
+
+						    return Shooter;
+						});
+					</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="14">
+						sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
+						    var Shooter = Plugin.extend("custom.ushell.plugin.shooter.designtime.Shooter");
+
+						    Shooter.prototype.registerElementOverlay = function (oOverlay) {
+						        oOverlay.attachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
+						        oOverlay.detachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype._onClick = function (e) {
+						        this.setSelected(false);
+						        this.addStyleClass("sapUiDtOverlayPoof");
+						        this.attachBrowserEvent("animationend", function () {
+						            this.getElement().setVisible(false);
+						        }, this);
+						        e.stopPropagation();
+						    };
+
+						    return Shooter;
+						});
+					</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="15, 17">
+						sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
+						    var Shooter = Plugin.extend("custom.ushell.plugin.shooter.designtime.Shooter");
+
+						    Shooter.prototype.registerElementOverlay = function (oOverlay) {
+						        oOverlay.attachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
+						        oOverlay.detachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype._onClick = function (e) {
+						        this.setSelected(false);
+						        this.addStyleClass("sapUiDtOverlayPoof");
+						        this.attachBrowserEvent("animationend", function () {
+						            this.getElement().setVisible(false);
+						        }, this);
+						        e.stopPropagation();
+						    };
+
+						    return Shooter;
+						});
+					</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="15-17">
+						sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
+						    var Shooter = Plugin.extend("custom.ushell.plugin.shooter.designtime.Shooter");
+
+						    Shooter.prototype.registerElementOverlay = function (oOverlay) {
+						        oOverlay.attachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
+						        oOverlay.detachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype._onClick = function (e) {
+						        this.setSelected(false);
+						        this.addStyleClass("sapUiDtOverlayPoof");
+						        this.attachBrowserEvent("animationend", function () {
+						            this.getElement().setVisible(false);
+						        }, this);
+						        e.stopPropagation();
+						    };
+
+						    return Shooter;
+						});
+					</code><code class="fragment ui5-code" data-trim style="max-height: 850px;" data-line-numbers="18">
+						sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
+						    var Shooter = Plugin.extend("custom.ushell.plugin.shooter.designtime.Shooter");
+
+						    Shooter.prototype.registerElementOverlay = function (oOverlay) {
+						        oOverlay.attachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
+						        oOverlay.detachBrowserEvent("dblclick", this._onClick, oOverlay);
+						    };
+
+						    Shooter.prototype._onClick = function (e) {
+						        this.setSelected(false);
+						        this.addStyleClass("sapUiDtOverlayPoof");
+						        this.attachBrowserEvent("animationend", function () {
+						            this.getElement().setVisible(false);
+						        }, this);
+						        e.stopPropagation();
+						    };
+
+						    return Shooter;
 						});
 					</code></pre>
-				</section> -->
-
-				<section data-background-color="#000">
-					<section data-transition="none">
-						<h2 class="ui5con-divider" style="margin-bottom: 2%;">Implementing Shooter plugin</h2>
-						<pre><code class="javascript" style="max-height: 850px;">
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-							 
-
-
-						</code></pre>
-					</section>
-					<section data-transition="none">
-						<h2 class="ui5con-divider" style="margin-bottom: 2%;">Implementing Shooter plugin</h2>
-						<pre><code class="javascript" style="max-height: 850px;">
-sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
-    var Shooter = Plugin.extend("custom.designtime.plugin.Shooter");
-
-    Shooter.prototype.registerElementOverlay = function (oOverlay) {
-        oOverlay.attachBrowserEvent('dblclick', this._onClick, oOverlay);
-    };
-
-    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
-        oOverlay.detachBrowserEvent('dblclick', this._onClick, oOverlay);
-    };
-
-    return Shooter;
-});
-
-
-
-
-
-
-
-
-
-						</code></pre>
-					</section>
-					<section data-transition="none">
-						<h2 class="ui5con-divider" style="margin-bottom: 2%;">Implementing Shooter plugin</h2>
-						<pre><code class="javascript" style="max-height: 850px;">
-sap.ui.define(["sap/ui/dt/Plugin"], function (Plugin) {
-    var Shooter = Plugin.extend("custom.designtime.plugin.Shooter");
-
-    Shooter.prototype.registerElementOverlay = function (oOverlay) {
-        oOverlay.attachBrowserEvent('dblclick', this._onClick, oOverlay);
-    };
-
-    Shooter.prototype.deregisterElementOverlay = function (oOverlay) {
-        oOverlay.detachBrowserEvent('dblclick', this._onClick, oOverlay);
-    };
-
-    Shooter.prototype._onClick = function (e) {
-        this.setSelected(false);
-        this.addStyleClass("sapUiDtOverlayPoof");
-        setTimeout(function () {
-            this.getElement().setVisible(false);
-        }.bind(this), 250);
-        e.stopPropagation();
-    };
-
-    return Shooter;
-});
-						</code></pre>
-					</section>
 				</section>
 
 				<section data-background-color="#000">
